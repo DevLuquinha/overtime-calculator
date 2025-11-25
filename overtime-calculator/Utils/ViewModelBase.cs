@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace overtime_calculator.ViewModels
+namespace overtime_calculator.Utils
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

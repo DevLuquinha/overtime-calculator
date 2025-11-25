@@ -1,4 +1,6 @@
-﻿namespace overtime_calculator.ViewModels
+﻿using overtime_calculator.Utils;
+
+namespace overtime_calculator.ViewModels
 {
     public class OvertimeViewModel : ViewModelBase
     {
