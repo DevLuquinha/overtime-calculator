@@ -1,12 +1,24 @@
 ﻿namespace overtime_calculator.Models
 {
-    internal class OvertimeRecord
+    public class OvertimeRecord
     {
-        public DateTime Date { get; set; } 
-        public TimeSpan EntryTime { get; set; }
-        public TimeSpan ExitTime { get; set; }
-        public string? Description { get; set; }
-        public TimeSpan CalculatedOvertime { get; set; } // ExitTime - EntryTime - 1 hour lunch
-        public double DaysEquivalent { get; set; } // CalculatedOvertime / 6 hours
+        public DateTime Date { get; } 
+        public TimeSpan EntryTime { get; }
+        public TimeSpan ExitTime { get; }
+        public string? Description { get; }
+        public TimeSpan CalculatedOvertime => ExitTime - EntryTime - TimeSpan.FromHours(1);
+        public double DaysEquivalent => CalculatedOvertime.TotalHours / 6.0;
+
+        public OvertimeRecord(
+            DateTime date,
+            TimeSpan entryTime,
+            TimeSpan exitTime,
+            string? description)
+        {
+            Date = date;
+            EntryTime = entryTime;
+            ExitTime = exitTime;
+            Description = description;
+        }
     }
 }
