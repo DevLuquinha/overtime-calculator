@@ -5,10 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:overtime_calculator"
         xmlns:views="clr-namespace:overtime_calculator.Views"
+        xmlns:viewmodels="clr-namespace:overtime_calculator.ViewModels"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Title="Calculadora de Horas Extras" 
+        Height="600" Width="1200"
+        WindowStartupLocation="CenterScreen">
 
-    <Grid>
-        <views:OvertimeView />
+    <Window.Resources>
+        <viewmodels:OvertimeViewModel x:Key="OvertimeViewModel"/>
+        <viewmodels:OvertimeRecordListingViewModel x:Key="OvertimeRecordListingViewModel"/>
+    </Window.Resources>
+
+    <Grid Background="#F5F5F5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MinWidth="400"/>
+            <ColumnDefinition Width="2*" MinWidth="600"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Seção de Registro -->
+        <views:OvertimeView Grid.Column="0" 
+                            DataContext="{StaticResource OvertimeViewModel}"/>
+
+        <!-- Seção de Listagem -->
+        <views:OvertimeRecordListingView Grid.Column="1" 
+                                         DataContext="{StaticResource OvertimeRecordListingViewModel}"/>
     </Grid>
 </Window>
