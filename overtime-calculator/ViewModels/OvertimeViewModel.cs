@@ -1,4 +1,6 @@
-﻿using overtime_calculator.Utils;
+﻿using overtime_calculator.Models;
+using overtime_calculator.Utils;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
