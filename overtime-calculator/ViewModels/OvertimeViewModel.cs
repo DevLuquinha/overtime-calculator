@@ -1,13 +1,14 @@
-﻿using overtime_calculator.Models;
-using overtime_calculator.Utils;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using overtime_calculator.Utils;
+using overtime_calculator.Models;
 
 namespace overtime_calculator.ViewModels
 {
     public class OvertimeViewModel : ViewModelBase
     {
+        public event EventHandler<OvertimeRecord>? OvertimeRecordSaved;
+
         private DateTime _recordDate;
         public DateTime RecordDate
         {
@@ -59,9 +60,46 @@ namespace overtime_calculator.ViewModels
             SetDefaultValues();
 
             SaveCommand = new RelayCommand(p => 
-            { 
-                Description = $"O seu registro de horas extras em {RecordDate:dd/MM/yyyy} das {EntryTime:HH:mm} às {ExitTime:HH:mm} foi salvo com sucesso.";
+            {
+                SaveRecord();
             });
+        }
+
+        private bool CanSaveRecord()
+        { 
+            return ExitTime > EntryTime;
+        }
+
+        private void SaveRecord()
+        {
+            if (!CanSaveRecord())
+            {
+                MessageBox.Show(
+                    "O horário de saída deve ser posterior ao horário de entrada.",
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return;
+            }
+
+            OvertimeRecord record = new OvertimeRecord
+            {
+                Date = RecordDate,
+                EntryTime = EntryTime,
+                ExitTime = ExitTime,
+                Description = Description ?? string.Empty
+            };
+
+            OvertimeRecordSaved?.Invoke(this, record);
+
+            MessageBox.Show(
+                "Registro de horas extras salvo com sucesso!",
+                "Sucesso",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            
+            SetDefaultValues();
         }
 
         private void SetDefaultValues()

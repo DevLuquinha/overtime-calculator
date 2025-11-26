@@ -11,10 +11,9 @@
         Height="600" Width="1200"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <viewmodels:OvertimeViewModel x:Key="OvertimeViewModel"/>
-        <viewmodels:OvertimeRecordListingViewModel x:Key="OvertimeRecordListingViewModel"/>
-    </Window.Resources>
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
 
     <Grid Background="#F5F5F5">
         <Grid.ColumnDefinitions>
@@ -22,12 +21,12 @@
             <ColumnDefinition Width="2*" MinWidth="600"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Seção de Registro -->
+        <!-- Record Section -->
         <views:OvertimeView Grid.Column="0" 
-                            DataContext="{StaticResource OvertimeViewModel}"/>
+                            DataContext="{Binding OvertimeViewModel}"/>
 
-        <!-- Seção de Listagem -->
+        <!-- Listing Section -->
         <views:OvertimeRecordListingView Grid.Column="1" 
-                                         DataContext="{StaticResource OvertimeRecordListingViewModel}"/>
+                                         DataContext="{Binding OvertimeRecordListingViewModel}"/>
     </Grid>
 </Window>
