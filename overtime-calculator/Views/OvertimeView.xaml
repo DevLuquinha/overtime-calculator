@@ -5,66 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="600" d:DesignWidth="400"
              FontFamily="{DynamicResource MaterialDesignFont}">
 
-    <Grid Background="#F0F0F0">
-        <materialDesign:Card Width="600" Padding="32" VerticalAlignment="Center" UniformCornerRadius="10">
+    <Grid Background="#FAFAFA">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <TextBlock Text="Registrar Horas Extras" 
                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Margin="0,0,0,20"
+                           Margin="0,0,0,30"
+                           HorizontalAlignment="Center"
                            Foreground="{DynamicResource PrimaryHueMidBrush}"/>
 
-                <DatePicker SelectedDate="{Binding RecordDate}"
-                            Width="250"
-                            HorizontalAlignment="Left"
-                            Margin="0,0,0,20"
-                            materialDesign:HintAssist.Hint="Selecione a Data"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                <materialDesign:Card Padding="24" UniformCornerRadius="10" Margin="0,0,0,20">
+                    <StackPanel>
+                        <DatePicker SelectedDate="{Binding RecordDate}"
+                                    Margin="0,0,0,20"
+                                    materialDesign:HintAssist.Hint="Data"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
-                <Grid Margin="0,0,0,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        <materialDesign:TimePicker SelectedTime="{Binding EntryTime}"
+                                                   Is24Hours="True"
+                                                   Margin="0,0,0,20"
+                                                   materialDesign:HintAssist.Hint="Hora de Entrada"
+                                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}" />
 
-                    <materialDesign:TimePicker Grid.Column="0"
-                                               SelectedTime="{Binding EntryTime}"
-                                               Is24Hours="True"
-                                               materialDesign:HintAssist.Hint="Hora de Entrada"
-                                               Style="{StaticResource MaterialDesignFloatingHintTimePicker}" />
+                        <materialDesign:TimePicker SelectedTime="{Binding ExitTime}"
+                                                   Is24Hours="True"
+                                                   Margin="0,0,0,20"
+                                                   materialDesign:HintAssist.Hint="Hora de Saída"
+                                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}" />
 
-                    <materialDesign:TimePicker Grid.Column="2"
-                                               SelectedTime="{Binding ExitTime}"
-                                               Is24Hours="True"
-                                               materialDesign:HintAssist.Hint="Hora de Saída"
-                                               Style="{StaticResource MaterialDesignFloatingHintTimePicker}" />
-                </Grid>
+                        <TextBox Text="{Binding Description}"
+                                 Height="100"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 AcceptsReturn="True"
+                                 Margin="0,0,0,20"
+                                 materialDesign:HintAssist.Hint="Justificativa / Descrição"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBlock Text="Justificativa / Descrição" 
-                           Style="{StaticResource MaterialDesignTextBlock}" 
-                           Margin="0,0,0,20"
-                           Foreground="{DynamicResource PrimaryHueMidBrush}"/>
-
-                <TextBox Text="{Binding Description}"
-                         Height="80"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         AcceptsReturn="True"
-                         Margin="0,0,0,30"
-                         materialDesign:HintAssist.Hint="Ex: Fiquei até tarde montando àrvore de natal..."
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Registrar"
-                            Command="{Binding SaveCommand}"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            ToolTip="Registrar horas extras."/>
-                </StackPanel>
-
+                        <Button Content="REGISTRAR"
+                                Command="{Binding SaveCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Height="40"
+                                ToolTip="Registrar horas extras"/>
+                    </StackPanel>
+                </materialDesign:Card>
             </StackPanel>
-        </materialDesign:Card>
+        </ScrollViewer>
     </Grid>
 </UserControl>
