@@ -14,9 +14,10 @@ namespace overtime_calculator
                 .UseSqlite(CONNECTION_STRING)
                 .Options;
 
-            OvertimeCalculatorDbContext dbContext = new OvertimeCalculatorDbContext(options);
-
-            dbContext.Database.Migrate();
+            using (OvertimeCalculatorDbContext dbContext = new OvertimeCalculatorDbContext(options))
+            {
+                dbContext.Database.Migrate();
+            }
         }
     }
 }
