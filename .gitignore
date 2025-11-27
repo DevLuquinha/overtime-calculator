@@ -416,3 +416,11 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Design-time DbContext factory files
+/overtime-calculator/DbContexts/OvertimeCalculatorDesignTimeDbContextFactory.cs
+
+// ...existing code...
+# Design-time DbContext factory files
+**/DbContexts/*DesignTimeDbContextFactory.cs
+OvertimeCalculatorDesignTimeDbContextFactory.cs
